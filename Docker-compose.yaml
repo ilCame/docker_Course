@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  backend:
+    build: multi-01-starting-setup/backend/Dockerfile
+    volumes:
+      - logs:/app/logs
+    ports:
+      - "2888:2888"
+    networks:
+      - goals-net
+  mongodb:
+    image: mongodb
+    volumes:
+      - data:/data/db
+    networks:
+      - goals-net
+
+networks:
+  goals-net:
+    name: goals-net
