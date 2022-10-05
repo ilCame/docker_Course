@@ -6,7 +6,7 @@ services:
     volumes:
       - logs:/app/logs
     ports:
-      - "2888:2888"
+      - "${Backend_port}:${Backend_port}"
     networks:
       - goals-net
   mongodb:
@@ -19,10 +19,10 @@ services:
     image: goals-frontend
     build: multi-01-starting-setup/frontend
     ports:
-      -"3000:3000"
+      -"${Frontend_port}:${Frontend_port}"
     networks:
       - goals-net
 
 networks:
   goals-net:
-    name: goals-net
+    name: ${Net_name}
