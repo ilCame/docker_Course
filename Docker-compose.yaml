@@ -5,6 +5,7 @@ services:
     build: multi-01-starting-setup/backend
     volumes:
       - logs:/app/logs
+      - /docker_Course/multi-01-starting-setup/backend:/app
     ports:
       - "${Backend_port}:${Backend_port}"
     networks:
