@@ -14,4 +14,7 @@ COPY . .
 
 EXPOSE ${port}
 
+ENV MongoDb_Username=mongoadmin
+ENV MongoDb_Password=secret
+
 CMD ["node", "app.js"]
