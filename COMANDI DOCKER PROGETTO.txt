@@ -1,0 +1,11 @@
+COMANDI DOCKER PROGETTO
+
+
+Fa partire l'immagine di mongodb legata ad un volume di nome data, gestito interamente da docker, questo container sara` presente nel network goals-net e avra` uno username e password settati
+sudo docker run --name mongodb -v data:/data/db --rm -d --network goals-net -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=secret mongo
+
+Fa partire l'immagine che creiamo noi della nostra parte BE legata ad un binding mount (quindi una cartella nella nostra local machine) con la porta 2888:2888 aperta e il network solito
+sudo docker run --name goals-backend -v /docker_Course/multi-01-starting-setup/backend/app:/app -v logs:/app/logs -v /app/node_modules -d --rm -p 2888:2888 --network goals-net goals-node
+
+fa partire l'immagine della nostra parte FE legata ad una binding mount per la cartella SRC con la porta 3000:3000 per permettere al container di essere sempre conscio delle modifiche in tempo reale
+docker run -v /docker_Course/multi-01-starting-setup/frontend/src:/app/src --name goals-frontend --rm -p 3000:3000 -it goals-react
