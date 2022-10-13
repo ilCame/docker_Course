@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+  mongodb:
+    image: 'mongodb'
+    volumes:
+      - data:/data/db
+    environment:
+      MongoDb_Username: mongoadmin
+      MongoDb_Password: secret
+  backend:
+    build: ./backend
+    image: 'goals-node'
+    environment:
+      - Backend_port: "2888"
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    ports:
+      - "2888:2888"
+    env_file:
+      - ./.env
+    depends_on:
+      - mongodb
+  frontend:
+    build: ./frontend
+    image: goals-frontend
+    ports: -"3000:3000"
+    volumes:
+      -./frontend/src:/app/src
+    std_open: true
+    tty: true
+    depends_on:
+      - backend
+
+volumes:
+  data:
+  logs:

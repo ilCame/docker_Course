@@ -3,4 +3,11 @@ Docker Compose
 
 docker compose is a tool that allow to replace multiple/single docker builds and docker run comands with just one configuration file;
 
-docker compose will not replace dockerFiles, they work together, docker compose does not replace images or containers and also docker compose is not suited for managing multiple containers on different host machine. 
+docker compose will not replace dockerFiles, they work together, docker compose does not replace images or containers and also docker compose is not suited for managing multiple containers on different host machine.
+
+
+std_open: true
+    tty: true
+
+in the docker compose file, is used for setting the container in interactive mode. 
+std_open is used to let docker know that the service need an open input connection. 
