@@ -10,4 +10,4 @@ std_open: true
     tty: true
 
 in the docker compose file, is used for setting the container in interactive mode. 
-std_open is used to let docker know that the service need an open input connection. 
+std_open is used to let docker know that the service need an open input connection.
