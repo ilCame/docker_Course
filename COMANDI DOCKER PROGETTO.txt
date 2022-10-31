@@ -9,3 +9,6 @@ sudo docker run --name goals-backend -v /docker_Course/multi-01-starting-setup/b
 
 fa partire l'immagine della nostra parte FE legata ad una binding mount per la cartella SRC con la porta 3000:3000 per permettere al container di essere sempre conscio delle modifiche in tempo reale
 docker run -v /docker_Course/multi-01-starting-setup/frontend/src:/app/src --name goals-frontend --rm -p 3000:3000 -it goals-react
+
+this command let you run certain command inside of a running container besides the default this container executes, so besides the comand that we might have specified insiede a docker file.
+docker exec

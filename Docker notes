@@ -11,3 +11,10 @@ std_open: true
 
 in the docker compose file, is used for setting the container in interactive mode. 
 std_open is used to let docker know that the service need an open input connection.
+
+#####################
+
+Docker Utility Contaniners
+
+Utility containers are containers witch only have a certain environment in them, the idea is that they don't start an application when you run them but
+you run them with some command specified by you and execute a certain task.
