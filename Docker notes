@@ -21,6 +21,12 @@ you run them with some command specified by you and execute a certain task.
 
 #####################
 
+A Karavek & PHP Dockerized Project
+
+./src:/var/www/html:delegated on volumes on the docker file, the delegated part is used so that if the container should write some data there it's not instantly reflected back to the host machine, instead it is besically processed in bathces. it'a optimization. 
+
+#####################
+
 Deploying Docker containers:
 
 In a Dev environment containers should encapsulate the runtime environment but not necessarily the code. use Bind Mounts to provide your local host
