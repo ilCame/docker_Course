@@ -21,7 +21,7 @@ you run them with some command specified by you and execute a certain task.
 
 #####################
 
-A Karavek & PHP Dockerized Project
+A Laravek & PHP Dockerized Project
 
 ./src:/var/www/html:delegated on volumes on the docker file, the delegated part is used so that if the container should write some data there it's not instantly reflected back to the host machine, instead it is besically processed in bathces. it'a optimization. 
 
@@ -33,3 +33,9 @@ In a Dev environment containers should encapsulate the runtime environment but n
 project files to the running containers. this allows for instant updates without restarting the container.
 
 For production the container works standalone, you should not have source code on your remote machine. image / container is the single source truth. so in production we will use copy instead of bind mounts to copy a code snapshot into the image. this ensures that evry image runs without any extra, surrounding configuration or code
+
+
+default.conf is a special file that can be merged into a bigger nginx config
+
+this is put in the docker-compose file and can be use to create or modify a entrypoint on a docker file
+entrypoint: entrypoint
