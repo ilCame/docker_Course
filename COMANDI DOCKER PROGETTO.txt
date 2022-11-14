@@ -12,3 +12,9 @@ docker run -v /docker_Course/multi-01-starting-setup/frontend/src:/app/src --nam
 
 this command let you run certain command inside of a running container besides the default this container executes, so besides the comand that we might have specified insiede a docker file.
 docker exec
+
+Questo comando fa partire la build di docker compose ma spcefificando di far partire solo i servizi server php mysql 
+docke-compose up server php mysql (docker-compose up [SERVICES])
+
+this forces docker compose to go throuhth the docker files again and see if something change for re-creating the image 
+docker-compose up -d --build server
