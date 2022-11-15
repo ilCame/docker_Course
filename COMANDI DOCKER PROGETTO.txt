@@ -12,3 +12,6 @@ docker run -v /docker_Course/multi-01-starting-setup/frontend/src:/app/src --nam
 
 this command let you run certain command inside of a running container besides the default this container executes, so besides the comand that we might have specified insiede a docker file.
 docker exec
+
+whenever we docker run an image, docker always checks, whether there is this image locally, and if it does he use that and don't check if it exist remotly, to do so we can use 
+docker pull
