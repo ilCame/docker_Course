@@ -39,3 +39,12 @@ default.conf is a special file that can be merged into a bigger nginx config
 
 this is put in the docker-compose file and can be use to create or modify a entrypoint on a docker file
 entrypoint: entrypoint
+
+######################
+
+Deploying Docker containers:
+
+In a Dev environment containers should encapsulate the runtime environment but not necessarily the code. use Bind Mounts to provide your local host
+project files to the running containers. this allows for instant updates without restarting the container.
+
+For production the container works standalone, you should not have source code on your remote machine. image / container is the single source truth. so in production we will use copy instead of bind mounts to copy a code snapshot into the image. this ensures that evry image runs without any extra, surrounding configuration or code
