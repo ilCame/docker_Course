@@ -70,3 +70,53 @@ Disadvantages:
 Development to production: 
 
 Bind Mounts should not be used in production, containerized apps might need a build step (for example React apps), multi-container projects might need to be split (or should be split) across multiple hosts / remote machine but we also have a trade-offs between control and responsability.
+
+######################
+
+Manual deployment of Containers is hard to maintain, error-prone and annoying, container might crash or go down and need to be replaced. we might need more container instance upon traffic spikes. Incoming traffic should be distributed equally.
+
+With Kubernetes we have a way of defining our deployments, our scaling of containers and how containers should be monitored indipended from the cloud server we are using. Kubernetes is an open-source system for orchestrating container deployments, it can help us with automatic deployment, scaling & load balancing and management. 
+
+kubernates just allows us to write down a kubernetes configuration where we specify the desired architecture and number of running containers. and the we can pass those configuration to any cloud provider/remote machine throught some specific setup or tool. the idea for using kubernetes is having a standardized way of describing deployments. that said, Kuneretes is not a cloud service provider like AWS or microsoft Azure. it's not a sercive by a cloud service provider. it's not just a software you run on some machine, but it's a collection of concepts and tools.
+
+kubernetes is like Docker-Compose for multiple machines
+
+in kubernetes we have pods, the pods contains a docker container (but is also able to hold multiple containers), the pods are inside a worker node. Worker nodes run the containers of your application. "Nodes" are your machine/virtual instances.
+inside the worker node kubernetes needs also a proxy which is a tool that he set's up for us on shuc a worker node to control the network traffic on the pods. the master node is a machine that controls multiple worker nodes via the control plane. So we don't interact directly with our worker node, but we leave the master node and Kubernetes to control them. Inside the master node we have Various components which help with managing the worker nodes. if we put all togheter (worker nodes and master node) we create a cluster, this cluster will then send instructions to a cloud provider API to replicate this configurations on that cloud provider.
+
+The Worker node:
+
+think of the worker node as one computer/virtual instance, this worker node is managed by the master node. inside the worker node we can find:
+
+1) Kubklet (Is the comunication device between the master and the worker node, besically is a software/service running on the worker node machine e do the actual communication);
+2) Docker;
+3) Kube-proxy (manage node and pod network communications);
+4) Pods (whos host one or more application containers and their resources. this pods are created and managed by kubernetes); 
+
+The Master Node:
+
+Inside the master node we can find:
+
+1)An API server (this is use as a comunication device between worker and master node)
+2)Scheduler (is responsable to wathc the new pods and select the worker nodes to run them on)
+3)Kube-Controller manager (Watches and controls worker nodes, correct the number of pods)
+
+Kubectl:
+
+Kube control tool is used to sand instructions to the cluster for example to create a new deplyment ecc. 
+
+POD:
+
+the pod is the smallest unit kubernetes interacts with, kubernetes manage this pods, the pods contains and tuns one or multiple containers but the most common use-case is one container per pod. Pods contain shared resources for example volumes and has a cluster-internal IP address, which can be used to make a request to that pod.
+Containers inside a Pod can communicate via localhost. Pods are ephemeral, they won't persist. if a pod is replaced or removed by kubernetes all the resources in the pod is lost.
+
+Deployment object:
+
+the deploy object is able to control multiple pods, the idea of that is to set a desired state, so we can define what we want and kubernetes will get us there. Deployments can be paused, deleted and rolled back, and can be scaled.
+
+the command kubectl create deplyment create a deply object and send it automatically on the master none, the scheduler analyze the currently running pods and find the best node for the new pod. on the worker node we have the kublet that manages the pod and containers.
+
+Service Object:
+
+to reach a pod and the container running in the pod we need a service, the service object is another object kubernetes know which is responsible for exposing pods to other pods in the cluster or to entire world. the problem with the ip that we have on a pod is that is not possible to use it to access the pod from the world and that when a pod is replaced the ip will change. so we can't rely on a pod keeping the ip. service groups pods together and assign them the same IP address that won't change. Service can also allow external access to pods so that pods can be access outside of the cluster. 
+

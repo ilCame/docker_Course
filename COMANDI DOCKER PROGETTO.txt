@@ -15,16 +15,30 @@ docker exec
 
 whenever we docker run an image, docker always checks, whether there is this image locally, and if it does he use that and don't check if it exist remotly, to do so we can use 
 docker pull
-Questo comando fa partire la build di docker compose ma spcefificando di far partire solo i servizi server php mysql 
-docke-compose up server php mysql (docker-compose up [SERVICES])
-
-this forces docker compose to go throuhth the docker files again and see if something change for re-creating the image 
-docker-compose up -d --build server
-whenever we docker run an image, docker always checks, whether there is this image locally, and if it does he use that and don't check if it exist remotly, to do so we can use 
-docker pull
 
 Questo comando fa partire la build di docker compose ma spcefificando di far partire solo i servizi server php mysql 
 docke-compose up server php mysql (docker-compose up [SERVICES])
 
 this forces docker compose to go throuhth the docker files again and see if something change for re-creating the image 
 docker-compose up -d --build server
+
+Questo comando fa partire la build di docker compose ma spcefificando di far partire solo i servizi server php mysql 
+docke-compose up server php mysql (docker-compose up [SERVICES])
+
+this forces docker compose to go throuhth the docker files again and see if something change for re-creating the image 
+docker-compose up -d --build server
+
+KUBERNETES:
+
+serve per far partire il cluster (driver puo essere "virtual box" o "docker")
+minikube start --driver=[driver name]
+
+serve per inviare al cluster il segnale che deve creare una immagine, kubectl e` il comando utilizzato per mandare istruzioni al nostro master node, con --image noi specifichiamo quale immagine verra` utilizzata dal container che verra` creato da questo comando
+kubectl create deployment [name] --image=
+
+ci permette di vedere quanti deployment abbiamo
+kubectl get deployment
+
+serve per eliminare una immagine Deployiata
+kubectl delete deployment [name]
+
