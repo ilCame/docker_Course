@@ -120,3 +120,4 @@ Service Object:
 
 to reach a pod and the container running in the pod we need a service, the service object is another object kubernetes know which is responsible for exposing pods to other pods in the cluster or to entire world. the problem with the ip that we have on a pod is that is not possible to use it to access the pod from the world and that when a pod is replaced the ip will change. so we can't rely on a pod keeping the ip. service groups pods together and assign them the same IP address that won't change. Service can also allow external access to pods so that pods can be access outside of the cluster. 
 
+we can also use a declarative approach, using the kubectl apply command to use a config.yaml file with all the configuration that we need. a config file is defined and applied to change the desired state, and in a certain sense we can compere it to docker-compose.

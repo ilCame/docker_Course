@@ -37,8 +37,25 @@ serve per inviare al cluster il segnale che deve creare una immagine, kubectl e`
 kubectl create deployment [name] --image=
 
 ci permette di vedere quanti deployment abbiamo
-kubectl get deployment
+kubectl get [deployment]
 
 serve per eliminare una immagine Deployiata
 kubectl delete deployment [name]
 
+espone un pod creato da un deployment creando un service, gli si puo` anche assengare un tipo, ClusterIp e` il default e permette che sara` accessibile solo all'interno del cluster, LoadBalancer utilizza un LoadBalancer e generera` un ip unico e distribuira` il traffico tra i pods che abbiamo
+kubectl expose deployment [name of the deployment] --type=[tipo] --port=[numero] 
+
+Serve quando non abbiamo l'autoscaling quindi kubernetes non creera` i pods a seconda del traffico ma sappiamo che avremo un traffico abbastanza alto.
+kubectl scale deployment/[name] --replicas=[number]
+
+per fare l'aggiornamento del possiamo usare il comando set, per settare una nuova immagine al nostro deployment
+kubectl set image deployment/[name] [containerName]=[nuovaImmagine]
+
+serve a cancellare il deplyment precedente, --to-revison serve a specificare la revisione specifica che vogliamo visitare
+kubectl rollout undo deployment/[name] (--to-revison=[number])
+
+serve a vedere la storia di un determinato deployment, 
+kubectl rollout history deployment/[name] 
+
+serve a cancellare un deployment o un service.
+kubectl delete [command] [name]
