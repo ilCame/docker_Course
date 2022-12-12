@@ -1,64 +1,66 @@
-COMANDI DOCKER PROGETTO
-
+##### COMANDI DOCKER PROGETTO #####
 
 Fa partire l'immagine di mongodb legata ad un volume di nome data, gestito interamente da docker, questo container sara` presente nel network goals-net e avra` uno username e password settati
-sudo docker run --name mongodb -v data:/data/db --rm -d --network goals-net -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=secret mongo
+# sudo docker run --name mongodb -v data:/data/db --rm -d --network goals-net -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=secret mongo
 
 Fa partire l'immagine che creiamo noi della nostra parte BE legata ad un binding mount (quindi una cartella nella nostra local machine) con la porta 2888:2888 aperta e il network solito
-sudo docker run --name goals-backend -v /docker_Course/multi-01-starting-setup/backend/app:/app -v logs:/app/logs -v /app/node_modules -d --rm -p 2888:2888 --network goals-net goals-node
+# sudo docker run --name goals-backend -v /docker_Course/multi-01-starting-setup/backend/app:/app -v logs:/app/logs -v /app/node_modules -d --rm -p 2888:2888 --network goals-net goals-node
 
 fa partire l'immagine della nostra parte FE legata ad una binding mount per la cartella SRC con la porta 3000:3000 per permettere al container di essere sempre conscio delle modifiche in tempo reale
-docker run -v /docker_Course/multi-01-starting-setup/frontend/src:/app/src --name goals-frontend --rm -p 3000:3000 -it goals-react
+# docker run -v /docker_Course/multi-01-starting-setup/frontend/src:/app/src --name goals-frontend --rm -p 3000:3000 -it goals-react
 
 this command let you run certain command inside of a running container besides the default this container executes, so besides the comand that we might have specified insiede a docker file.
-docker exec
+# docker exec
 
 whenever we docker run an image, docker always checks, whether there is this image locally, and if it does he use that and don't check if it exist remotly, to do so we can use 
-docker pull
+# docker pull
 
 Questo comando fa partire la build di docker compose ma spcefificando di far partire solo i servizi server php mysql 
-docke-compose up server php mysql (docker-compose up [SERVICES])
+# docke-compose up server php mysql (docker-compose up [SERVICES])
 
 this forces docker compose to go throuhth the docker files again and see if something change for re-creating the image 
-docker-compose up -d --build server
+# docker-compose up -d --build server
 
 Questo comando fa partire la build di docker compose ma spcefificando di far partire solo i servizi server php mysql 
-docke-compose up server php mysql (docker-compose up [SERVICES])
+# docke-compose up server php mysql (docker-compose up [SERVICES])
 
 this forces docker compose to go throuhth the docker files again and see if something change for re-creating the image 
-docker-compose up -d --build server
+# docker-compose up -d --build server
 
-KUBERNETES:
+##### KUBERNETES #####
 
 serve per far partire il cluster (driver puo essere "virtual box" o "docker")
-minikube start --driver=[driver name]
+# minikube start --driver=[driver name]
 
 serve per inviare al cluster il segnale che deve creare una immagine, kubectl e` il comando utilizzato per mandare istruzioni al nostro master node, con --image noi specifichiamo quale immagine verra` utilizzata dal container che verra` creato da questo comando
-kubectl create deployment [name] --image=
+# kubectl create deployment [name] --image=
 
 ci permette di vedere quanti deployment abbiamo
-kubectl get [deployment]
+# kubectl get [deployment]
 
 serve per eliminare una immagine Deployiata
-kubectl delete deployment [name]
+# kubectl delete deployment [name]
 
 espone un pod creato da un deployment creando un service, gli si puo` anche assengare un tipo, ClusterIp e` il default e permette che sara` accessibile solo all'interno del cluster, LoadBalancer utilizza un LoadBalancer e generera` un ip unico e distribuira` il traffico tra i pods che abbiamo
-kubectl expose deployment [name of the deployment] --type=[tipo] --port=[numero] 
+# kubectl expose deployment [name of the deployment] --type=[tipo] --port=[numero] 
 
 Serve quando non abbiamo l'autoscaling quindi kubernetes non creera` i pods a seconda del traffico ma sappiamo che avremo un traffico abbastanza alto.
-kubectl scale deployment/[name] --replicas=[number]
+# kubectl scale deployment/[name] --replicas=[number]
 
 per fare l'aggiornamento del possiamo usare il comando set, per settare una nuova immagine al nostro deployment
-kubectl set image deployment/[name] [containerName]=[nuovaImmagine]
+# kubectl set image deployment/[name] [containerName]=[nuovaImmagine]
 
 serve a cancellare il deplyment precedente, --to-revison serve a specificare la revisione specifica che vogliamo visitare
-kubectl rollout undo deployment/[name] (--to-revison=[number])
+# kubectl rollout undo deployment/[name] (--to-revison=[number])
 
 serve a vedere la storia di un determinato deployment, 
-kubectl rollout history deployment/[name] 
+# kubectl rollout history deployment/[name] 
 
 serve a cancellare un deployment o un service.
-kubectl delete [command] [name]
+# kubectl delete [command] [name]
 
-serve ad applicare il nostro file yaml
-kubectl apply -f=deployment.yaml
+serve ad applicare il nostro file yaml, serve anche per applicare le modifiche fatte.
+# kubectl apply -f=deployment.yaml
+
+serve a cancellare le risorse create, non cancella il file
+# kubectl delete -f=[fileName]

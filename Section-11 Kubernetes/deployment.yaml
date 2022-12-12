@@ -19,3 +19,8 @@ spec:
           image: [name docker repo]/kub-first-app
       # - name:
       #   image  we can add multiple image using this method
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 3

@@ -129,3 +129,5 @@ to use the cinfig.yaml for kubernetes we need to specify first a apiVersion, thi
 the kind node is used to specify what type of the kubernetes object we are going to create (like deployment or service)
 
 template is use to define the pods that should be created as part of this deployment, nested below lable we can set a key-value as we wish (app that we have on our example can be change as we wish)
+
+livenessProbe is a configuration used to check to see whether the container is up and running, this is checked by the pod.
